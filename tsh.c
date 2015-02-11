@@ -174,7 +174,7 @@ int main(int argc, char **argv)
  */
 void eval(char *cmdline) 
 {
-    char* argv[MAXARGS];
+    char *argv[MAXARGS];
     char buf[MAXLINE];
     int bg;
     pid_t pid;
@@ -184,10 +184,10 @@ void eval(char *cmdline)
     if(argv[0] == NULL);
 	return;
     
-    if(!builtin_command(argv)){
-        if((pid = Fork() == 0)){
+    if(!builtin_cmd(argv)){
+        if((pid = fork()) == 0){
 	    if(execve(argv[0], argv, environ) < 0){
-		printf("%s: Command not founf. \n", argv[0]);
+		printf("%s: Command not found. \n", argv[0]);
 		exit(0);
 	    }
 	} 
@@ -269,7 +269,7 @@ int parseline(const char *cmdline, char **argv)
  */
 int builtin_cmd(char **argv) 
 {
-    if(!strcmp(argv[0],"quit"))
+    if(!strcmp(argv[0], "quit"))
 	exit(0);
     if(!strcmp(argv[0], "&"))
 	return 1;
