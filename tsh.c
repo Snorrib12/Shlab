@@ -181,7 +181,7 @@ void eval(char *cmdline)
     
     strcpy(buf, cmdline);
     bg = parseline(buf, argv);
-    if(argv[0] == NULL);
+    if(argv[0] == NULL)
 	return;
     
     if(!builtin_cmd(argv)){
@@ -191,14 +191,15 @@ void eval(char *cmdline)
 		exit(0);
 	    }
 	} 
-    }
-    if(!bg){
-	int status;
-	if(waitpid(pid, &status, 0) < 0)
+    
+        if(!bg){
+	    int status;
+	    if(waitpid(pid, &status, 0) < 0)
 	    unix_error("waitfg: waitpid error");
     
 	else
 	    printf("%d %s",pid, cmdline);
+	}
     }
     return;
 }
