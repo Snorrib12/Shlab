@@ -188,7 +188,8 @@ void eval(char *cmdline)
         if((pid = Fork() == 0)){
 	    if(execve(argv[0], argv, environ) < 0){
 		printf("%s: Command not founf. \n", argv[0]);
-		exit(0)
+		exit(0);
+	    }
 	} 
     }
     if(!bg){
